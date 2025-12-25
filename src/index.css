@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 之後才是我們之前的自定義樣式 */
+body {
+  @apply bg-slate-900 text-slate-100 font-sans antialiased;
+  background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+}
+
+.floor-glow {
+  @apply bg-indigo-500 border-indigo-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.5)];
+}
+
+.floor-dim {
+  @apply bg-slate-800/50 border-slate-700 text-slate-500;
+}
