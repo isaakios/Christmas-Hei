@@ -116,7 +116,22 @@ const AdminPage = () => {
     return () => clearInterval(interval);
   }, [game]);
 
-  const update = (obj) => supabase.from('game_state').update(obj).eq('id', 1);
+  // 替換 src/App.jsx 內的 update 函式
+  const update = async (obj) => {
+    console.log("嘗試更新數據:", obj);
+    const { data, error } = await supabase
+      .from('game_state')
+      .update(obj)
+      .eq('id', 1)
+      .select();
+
+    if (error) {
+      console.error("Supabase 更新錯誤:", error.message);
+      alert("更新失敗: " + error.message);
+    } else {
+      console.log("更新成功:", data);
+    }
+  };
 
   const toggleFloor = (f) => {
     const current = game.active_floors || [];
