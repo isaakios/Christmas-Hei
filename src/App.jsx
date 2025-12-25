@@ -94,7 +94,25 @@ const AdminPage = () => {
     return () => clearInterval(interval);
   }, [game]);
 
-  const update = (obj) => supabase.from('game_state').update(obj).eq('id', 1);
+  // 在 AdminPage 裡找到這行並替換
+  const update = async (obj) => {
+    console.log("正在嘗試更新:", obj);
+    const { data, error } = await supabase
+      .from('game_state')
+      .update(obj)
+      .eq('id', 1)
+      .select(); // 加入 select 讓我們看到回傳結果
+
+    if (error) {
+      console.error("Supabase 更新出錯:", error.message);
+      alert("出錯了: " + error.message);
+    } else if (data.length === 0) {
+      console.warn("找不到 ID 為 1 的資料，更新失敗！");
+      alert("更新失敗：請檢查資料庫是否有 ID 為 1 的資料");
+    } else {
+      console.log("更新成功:", data);
+    }
+  };
 
   const toggleFloor = (f) => {
     const current = game.active_floors || [];

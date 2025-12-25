@@ -1,8 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss"; /* 使用 v4 的導入方式 */
 
-/* 之後才是我們之前的自定義樣式 */
+/* 您的自定義樣式 */
+@theme {
+  --color-floor-glow: #6366f1;
+}
+
 body {
   @apply bg-slate-900 text-slate-100 font-sans antialiased;
   background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
